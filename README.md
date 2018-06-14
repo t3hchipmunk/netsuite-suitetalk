@@ -9,16 +9,32 @@ Create a new instance of the client. Initializing the client is an asynchronous 
 ``` javascript
 'use strict';
 const netsuite       = require('netsuite-suitetalk');
+// use credentials authentication
 const netSuiteClient = new netsuite(
 {
     accountId : YOURACCOUNTID,
     appId     : YOURAPPLICATIONID,
-    baseUrl   : YOURBASEURL,     // defaults to production NS - https://webservices.netsuite.com/services/NetSuitePort_2016_2
+    baseUrl   : YOURBASEURL,     // defaults to production NS - https://webservices.netsuite.com/services/NetSuitePort_2018_1
     password  : YOURPASSWORD,
     roleId    : YOURROLEID,
     username  : YOURUSERNAME,
-    wsdlPath  : YOURWSDLPATH    // defaults to wsdl (v2016_2) - https://webservices.netsuite.com/wsdl/v2016_2_0/netsuite.wsdl
+    wsdlPath  : YOURWSDLPATH    // defaults to wsdl (v2018_1) - https://webservices.netsuite.com/wsdl/v2018_1_0/netsuite.wsdl
 });
+
+// use token based authentication
+const netSuiteClient = new netsuite(
+{
+    accountId : YOURACCOUNTID,
+    baseUrl   : YOURBASEURL,     // defaults to production NS - https://webservices.netsuite.com/services/NetSuitePort_2018_1
+	tokenValues: {
+		tokenId: YOURTOKENID,
+		tokenSecret: YOURTOKENSECRET,
+		consumerKey: YOURCONSUMERKEY,
+		consumerSecret: YOURCONSUMERSECRET
+	},
+    wsdlPath  : YOURWSDLPATH    // defaults to wsdl (v2018_1) - https://webservices.netsuite.com/wsdl/v2018_1_0/netsuite.wsdl
+});
+
 netSuiteClient.initialize((err) =>
 {
     // netSuiteClient methods are available
